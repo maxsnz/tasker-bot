@@ -20,10 +20,15 @@ jobs:
       - name: Build and deploy
         run: |
           ssh -o StrictHostKeyChecking=no root@77.232.138.71 << 'EOF'
+            set -e
             cd /var/www/tasker-bot
             git pull
-            docker stop taskerbot || true
-            docker rm taskerbot || true
-            docker build --network=host -t tasker-bot .
-            docker run -d --restart=always --name taskerbot --network=host -p 3000:3000 tasker-bot
+
+            docker-compose down || true
+            docker-compose build
+            docker-compose up -d --force-recreate
+
+            docker image prune -af
+            docker builder prune -af
+            docker volume prune -f
           EOF
