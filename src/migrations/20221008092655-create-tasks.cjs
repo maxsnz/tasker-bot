@@ -1,11 +1,15 @@
 /** @type {import('sequelize-cli').Migration} */
-export default {
+module.exports = {
   down: async (queryInterface) => {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("Tasks");
   },
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Tasks", {
       createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      date: {
         allowNull: false,
         type: Sequelize.DATE,
       },
@@ -15,12 +19,20 @@ export default {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      isFinished: {
+        type: Sequelize.BOOLEAN,
+      },
+      text: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+      },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
     });
   },

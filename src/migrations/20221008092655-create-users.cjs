@@ -1,10 +1,10 @@
 /** @type {import('sequelize-cli').Migration} */
-export default {
+module.exports = {
   down: async (queryInterface) => {
-    await queryInterface.dropTable("Tests");
+    await queryInterface.dropTable("Users");
   },
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Tests", {
+    await queryInterface.createTable("Users", {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
