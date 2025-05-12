@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: tasker-bot
     network_mode: host
     environment:
       DB_HOST: localhost
